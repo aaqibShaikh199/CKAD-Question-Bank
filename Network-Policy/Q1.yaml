@@ -1,0 +1,25 @@
+Q1: Frontend → Backend traffic in same namespace
+Question:
+In namespace team-a, you have two pods: frontend and backend.
+Pods with label app: backend should only accept traffic from pods with label app: frontend in the same namespace. All other traffic should be blocked
+
+#YAML
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-frontend-to-backend
+  namespace: team-a
+spec:
+  podSelector:
+    matchLabels:
+      app: backend
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: frontend
+    ports:
+    - protocol: TCP
+      port: 80
