@@ -1,0 +1,26 @@
+Q2: Allow pods from another namespace
+
+Question:
+In namespace payments, there is a pod db (label: role: database).
+Allow only pods from namespace app to connect to db on port 5432. Block all other traffic.
+
+#ans
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-app-to-db
+  namespace: payments
+spec:
+  podSelector:
+    matchLabels:
+      role: database
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          name: app
+    ports:
+    - protocol: TCP
+      port: 5432
