@@ -1,0 +1,30 @@
+Q8: Cache pods egress to DB pods
+
+Question:
+Namespace dev has pods:
+  a) cache (label: role=cache)
+  b) database (label: role=database)
+Apply default deny ingress. Allow cache pods to talk to database pods on port 5432 via egress.
+
+#Ans
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: cache-to-db
+  namespace: dev
+spec:
+  podSelector:
+    matchLabels:
+      role: cache
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress: []   # deny all ingress
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          role: database
+    ports:
+    - protocol: TCP
+      port: 5432
