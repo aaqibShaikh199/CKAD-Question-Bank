@@ -1,0 +1,25 @@
+Q3: Nginx pods allow only internet ingress
+
+Question:
+There is a service nginx-svc exposing pods labeled app: nginx.
+Allow ingress only from external IPs, and block all other pod-to-pod traffic. Egress has no restriction.
+
+#Ans
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: nginx-internet-only
+  namespace: default
+spec:
+  podSelector:
+    matchLabels:
+      app: nginx
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - ipBlock:
+        cidr: 0.0.0.0/0
+    ports:
+    - protocol: TCP
+      port: 80
