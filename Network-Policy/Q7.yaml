@@ -1,0 +1,25 @@
+Q7: DB pods allow frontend namespace pods
+
+Question:
+Namespace staging, pods labeled tier: db should accept traffic only from pods in namespace frontend (label: purpose=client) on port 3306.
+
+#Ans
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-frontend-to-db
+  namespace: staging
+spec:
+  podSelector:
+    matchLabels:
+      tier: db
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          purpose: client
+    ports:
+    - protocol: TCP
+      port: 3306
