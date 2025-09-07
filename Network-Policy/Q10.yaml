@@ -1,0 +1,26 @@
+Q10: QA pods → Dev pods allow
+
+Question:
+Namespace restricted has default deny ingress.
+Allow pods labeled team: qa to access pods labeled team: dev on port 8080. No egress restrictions.
+
+#Ans
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: qa-to-dev
+  namespace: restricted
+spec:
+  podSelector:
+    matchLabels:
+      team: qa
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          team: dev
+    ports:
+    - protocol: TCP
+      port: 8080
