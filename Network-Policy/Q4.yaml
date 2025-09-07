@@ -1,0 +1,31 @@
+Q4: pod-a → pod-b communication
+
+Question:
+Namespace dev has three pods:
+
+pod-a (label: app=a)
+pod-b (label: app=b)
+pod-c (label: app=c)
+
+NOTE:- pod-a can talk to pod-b. pod-c cannot talk to pod-a or pod-b.
+
+#Ans
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-a-to-b
+  namespace: dev
+spec:
+  podSelector:
+    matchLabels:
+      app: a
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: b
+    ports:
+    - protocol: TCP
+      port: 80
