@@ -1,0 +1,28 @@
+Q5: Restricted namespace with monitoring access
+
+Question:
+Create a namespace restricted and deny all ingress and egress traffic for all pods by default.
+Then allow pods with role: monitoring to access pods with role: db on port 9090.
+
+#Ans
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: monitoring-access
+  namespace: restricted
+spec:
+  podSelector:
+    matchLabels:
+      role: db
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          role: monitoring
+    ports:
+    - protocol: TCP
+      port: 9090
+  egress: []
