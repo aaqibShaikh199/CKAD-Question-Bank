@@ -1,0 +1,1 @@
+Q1:- Create a ServiceAccount named aaqib-sa in the default namespace. && Give this ServiceAccount permission to only get, watch, and list pods in the same namespace.
