@@ -1,1 +1,50 @@
 Q1:- Create a ServiceAccount named aaqib-sa in the default namespace. && Give this ServiceAccount permission to only get, watch, and list pods in the same namespace.
+
+#Ans
+---
+#SERVICE-ACCOUNT
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: aaqib-sa
+  namespace: default
+---
+#ROLE
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: default
+  name: aaqib-role
+rules:
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get", "watch", "list"]
+---
+#ROLE-BINDING
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: aaqib-rolebinding
+  namespace: default
+subjects:
+- kind: ServiceAccount
+  name: aaqib-sa
+  namespace: default
+roleRef:
+  kind: Role
+  name: aaqib-role
+  apiGroup: rbac.authorization.k8s.io
+---
+#POD
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  namespace: default
+spec:
+  serviceAccountName: aaqib-sa
+  containers:
+  - name: nginx
+    image: nginx:1.14.2
+    ports:
+    - containerPort: 80
