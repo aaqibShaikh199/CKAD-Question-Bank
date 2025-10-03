@@ -1,0 +1,15 @@
+Q1: Create a Pod named app-pod with a single container using image nginx. Add a liveness probe that checks /healthz on port 80.
+
+#Ans
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app-pod
+spec:
+  containers:
+  - name: nginx-container
+    image: nginx
+    livenessProbe:
+      httpGet:
+        path: /healthz
+        port: 80
