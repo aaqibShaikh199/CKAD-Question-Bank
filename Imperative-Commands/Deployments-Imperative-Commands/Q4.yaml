@@ -1,0 +1,4 @@
+Q4: Create a Deployment backend with image python:3.9 and expose container port 5000.
+
+#CMD:
+kubectl create deployment backend --image=python:3.9 --port=5000
