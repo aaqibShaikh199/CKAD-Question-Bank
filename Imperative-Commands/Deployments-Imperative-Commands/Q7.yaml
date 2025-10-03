@@ -1,0 +1,5 @@
+Q7: Create a Deployment prod-web with image nginx:1.19. Later, update the Deployment image to nginx:1.25.
+
+#CMD:
+kubectl create deployment prod-web --image=nginx:1.19
+kubectl set image deployment/prod-web nginx=nginx:1.25
