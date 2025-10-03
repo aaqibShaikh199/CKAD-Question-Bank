@@ -1,0 +1,4 @@
+Q1: Create a Deployment my-nginx with image nginx:1.21 and 3 replicas.
+
+#CMD:
+kubectl create deployment my-nginx --image=nginx:1.21 --replicas=3
