@@ -1,0 +1,4 @@
+Q6: Create a Deployment custom-deploy with image redis:6.2, and generate its YAML file into redis-deploy.yaml.
+
+#CMD:
+kubectl create deployment custom-deploy --image=redis:6.2 --dry-run=client -o yaml > redis-deploy.yaml
