@@ -1,0 +1,20 @@
+Q8: Create a Pod named api-server with image myapi:v1. Add both readiness and liveness probes:
+a) readiness → TCP socket check on port 8080
+b) liveness → HTTP GET /health on port 8080
+
+#Ans
+apiVersion: v1
+kind: Pod
+metadata:
+  name: api-server
+spec:
+  containers:
+  - name: api-container
+    image: myapi:v1
+    readinessProbe:
+      tcpSocket:
+        port: 8080
+    livenessProbe:
+      httpGet:
+        path: /health
+        port: 8080
