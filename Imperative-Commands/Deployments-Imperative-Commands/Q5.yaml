@@ -1,0 +1,5 @@
+Q5: Create a Deployment api-server with image node:18, and then add an environment variable ENV=staging.
+
+#CMD;
+kubectl create deployment api-server --image=node:18
+kubectl set env deployment/api-server ENV=staging
