@@ -1,0 +1,16 @@
+Q6: Create a Pod named custom-probe with image nginx. Add a readiness probe on port 80, path /index.html, with failureThreshold=3.
+
+#Ans
+apiVersion: v1
+kind: Pod
+metadata:
+  name: custom-probe
+spec:
+  containers:
+  - name: nginx-container
+    image: nginx
+    readinessProbe:
+      httpGet:
+        path: /index.html
+        port: 80
+      failureThreshold: 3
