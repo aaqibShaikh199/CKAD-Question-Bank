@@ -1,0 +1,18 @@
+Q5: Create a Pod named myapp with image busybox. Add a liveness probe using command test -f /tmp/live with periodSeconds=10.
+
+#Ans 
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp
+spec:
+  containers:
+  - name: busybox-container
+    image: busybox
+    livenessProbe:
+      exec:
+        command:
+        - test
+        - -f
+        - /tmp/live
+      periodSeconds: 10
