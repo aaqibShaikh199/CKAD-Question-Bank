@@ -1,0 +1,17 @@
+Q3: Create a Pod named db-pod using image postgres. Configure a liveness probe that executes pg_isready -U postgres.
+
+#Ans
+apiVersion: v1
+kind: Pod
+metadata:
+  name: db-pod
+spec:
+  containers:
+  - name: postgres-container
+    image: postgres
+    livenessProbe:
+      exec:
+        command:
+        - sh
+        - -c
+        - pg_isready -U postgres
