@@ -1,0 +1,17 @@
+Q9: Create a Pod named delay-app using nginx. Add a readiness probe with initialDelaySeconds=10 and periodSeconds=5.
+
+#Ans
+apiVersion: v1
+kind: Pod
+metadata:
+  name: delay-app
+spec:
+  containers:
+  - name: nginx-container
+    image: nginx
+    readinessProbe:
+      httpGet:
+        path: /
+        port: 80
+      initialDelaySeconds: 10
+      periodSeconds: 5
