@@ -1,0 +1,22 @@
+Q10: Create a Pod named multi-probe with image nginx. Configure:
+a) liveness probe → exec command echo hello
+b) readiness probe → HTTP GET / port 80
+
+#Ans
+apiVersion: v1
+kind: Pod
+metadata:
+  name: multi-probe
+spec:
+  containers:
+  - name: nginx-container
+    image: nginx
+    livenessProbe:
+      exec:
+        command:
+        - echo
+        - hello
+    readinessProbe:
+      httpGet:
+        path: /
+        port: 80
