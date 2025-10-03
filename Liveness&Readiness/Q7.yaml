@@ -1,0 +1,19 @@
+Q7: Create a Pod named retry-app with image nginx. Add a liveness probe HTTP GET / on port 80 with failureThreshold=5 and periodSeconds=5.
+
+#Ans
+apiVersion: v1
+kind: Pod
+metadata:
+  name: retry-app
+spec:
+  containers:
+  - name: nginx-container
+    image: nginx
+    ports:
+    - containerPort: 80
+    livenessProbe:
+      httpGet:
+        path: /
+        port: 80
+      failureThreshold: 5
+      periodSeconds: 5
