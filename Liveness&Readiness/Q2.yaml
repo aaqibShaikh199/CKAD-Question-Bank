@@ -1,0 +1,18 @@
+Q2: Create a Pod named backend with image busybox that runs sleep 3600. Configure a readiness probe that checks if cat /tmp/ready succeeds.
+
+#Ans
+apiVersion: v1
+kind: Pod
+metadata:
+  name: backend
+spec:
+  containers:
+  - name: busybox-container
+    image: busybox
+    command: ["sleep", "3600"]
+    readinessProbe:
+      exec:
+        command:
+        - sh
+        - -c
+        - cat /tmp/ready
