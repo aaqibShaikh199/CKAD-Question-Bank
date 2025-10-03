@@ -1,0 +1,4 @@
+Q2: Create a Deployment my-app that runs busybox image and executes the command sleep 3600.
+
+#CMD:-
+kubectl create deployment my-app --image=busybox -- /bin/sh -c "sleep 3600"
