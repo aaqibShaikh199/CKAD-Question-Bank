@@ -1,0 +1,16 @@
+Q4: Create a Pod named web-check using image nginx. Add a readiness probe using HTTP GET on / with port 80 and initialDelaySeconds=5.
+
+#Ans
+apiVersion: v1
+kind: Pod
+metadata:
+  name: web-check
+spec:
+  containers:
+  - name: nginx-container
+    image: nginx
+    readinessProbe:
+      httpGet:
+        path: /
+        port: 80
+      initialDelaySeconds: 5
