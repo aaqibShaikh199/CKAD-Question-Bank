@@ -1,0 +1,5 @@
+Q9: Create a Deployment log-app with image busybox, which runs the command:
+sh -c "while true; do echo Hello; sleep 5; done"
+
+#CMD:
+kubectl create deployment log-app --image=busybox -- /bin/sh -c "while true; do echo Hello; sleep 5; done"
