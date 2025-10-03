@@ -1,0 +1,5 @@
+Q8: Create a Deployment scale-demo with image httpd:2.4. Then scale it to 5 replicas.
+
+#CMD:
+kubectl create deployment scale-demo --image=httpd:2.4
+kubectl scale deployment/scale-demo --replicas=5
