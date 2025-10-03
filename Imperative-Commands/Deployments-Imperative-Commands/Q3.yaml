@@ -1,0 +1,5 @@
+Q3: Create a Deployment frontend with image nginx:alpine, and then add a label tier=frontend.
+
+#CMD:
+kubectl create deployment frontend --image=nginx:alpine
+kubectl label deployment/frontend tier=frontend
